@@ -1,21 +1,31 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeAuthedUser } from '../actions/authedUser'
 import Login from './Login'
 
 class Nav extends React.Component {
-
+  state = {
+    toHome: false
+  }
   handleLogoutClick = (e) => {
     e.preventDefault()
     const { authedUser, dispatch } = this.props
 
+    this.setState(() => ({
+      toHome: true
+    }))
     dispatch(removeAuthedUser(authedUser))
-
-
   }
 
   render() {
+    const { authedUser, users } = this.props
+    const user = users[authedUser]
+    const { avatarURL, name } = user
+
+    if (this.state.toHome) {
+      return <Redirect to='/home' />
+    }
     return (
       <nav className='nav'>
         <ul>
@@ -34,14 +44,19 @@ class Nav extends React.Component {
               Leaderboard
             </NavLink>
           </li>
-          <li>
-            User
+          <li style={{display: "flex"}}>
+            <span>Hello</span>
+            <span>
+              <img
+                src={avatarURL}
+                alt={name}
+                className='avatar' />
+            </span>
           </li>
-          <li>
-            <a href='#' onClick={this.handleLogoutClick}>
+          <li onClick={this.handleLogoutClick}>
+            <button className='logout-btn'>
               Logout
-            </a>
-            
+            </button>
           </li>
         </ul>
         
@@ -49,9 +64,10 @@ class Nav extends React.Component {
     )
   }
 }
-function mapStateToProps ({ authedUser }) {
+function mapStateToProps ({ users, authedUser }) {
   return {
-    authedUser,
+    users,
+    authedUser
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route} from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import Homepage from './components/Homepage'
@@ -32,7 +32,12 @@ class App extends React.Component {
             {authenticated && <Nav />}
 
             {authenticated === null
-              ? <Route path='*' component={Login} />
+              ? <Route 
+                  path='*'
+                  render={({ history }) => (
+                    <Login navToHome={() => history.push('/home')} />
+                    )}
+                />
               
               : <div>
                   <Route path='/home' component={Homepage} />

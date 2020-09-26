@@ -8,14 +8,10 @@ class Login extends React.Component {
     id: ''
   }
 
-  handleSelect = (e) => {
-    
-
+  handleSelect = (e) => {  
     this.setState({
       id: e.target.value
     })
-    
-    
   }
 
   handleSubmit = (e) => {
@@ -24,10 +20,11 @@ class Login extends React.Component {
     const { dispatch } = this.props
     const { id } = this.state
     dispatch(setAuthedUser(id))
-    console.log(id)
+    this.props.navToHome()
 
   } 
   render() {
+    const { id } = this.state
     return (
       <div>
         <h1>Welcome to Would You Rather</h1>
@@ -35,12 +32,12 @@ class Login extends React.Component {
           <form>
             <label>Select a name:</label>
             <select onChange={(e) => this.handleSelect(e)} >
-              <option>Select a user</option>
+              <option value=''>Select a user</option>
               <option value='sarahedo'>Sara Hedo</option>
               <option value='tylermcginnis'>Tyler Mcginnis</option>
               <option value='johndoe'>John Doe</option>
             </select>
-            <button onClick={this.handleSubmit}>Submit</button>
+            <button onClick={this.handleSubmit} disabled={!id} >Submit</button>
           </form>
         
       </div>

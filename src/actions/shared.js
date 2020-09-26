@@ -1,12 +1,12 @@
 import { getInitialData, saveQuestionAnswer } from '../utils/api'
-import { receiveUsers } from './users'
-import { receiveQuestions, receiveQuestionAnswer } from './questions'
+import { receiveUsers, setUserAnswer } from './users'
+import { receiveQuestions, receiveQuestionAnswer, addQuestion } from './questions'
 import { setAuthedUser } from './authedUser'
 import { showLoading, hideLoading } from 'react-redux-loading'
 
 // const AUTHED_USER = 'sarahedo'
  
-export function handleInitialData() {
+export function handleInitialData(info) {
   return (dispatch) => {
     dispatch(showLoading())
     return getInitialData()
@@ -20,18 +20,20 @@ export function handleInitialData() {
 }
 
 
-export function handleQuestionAnswer (info) {
+export function handleQuestionAnswer(info) {
   return (dispatch) => {
-    //no need for OPTIMISTIC UPDATE
-
-
+    dispatch(showLoading())
+    
     return saveQuestionAnswer(info)
-      .then(question => {
-        // Add to store
-        
+      .then(() => {
+        dispatch(setUserAnswer(info))
+        dispatch(receiveQuestionAnswer(info))
+      })
+      .then(() => {
+        dispatch(hideLoading())
       })
       .catch((e) => {
-        console.warn('Error in handleReceiveQuestionAnswer: ', e)
+        console.warn('Error in handleQuestionAnswer: ', e)
         alert('There was an error receiving your answer. Try again.')
 
 

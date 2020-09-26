@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
+import { Redirect } from 'react-router-dom'
+
 
 class CreateNewPoll extends Component {
   state = {
     optionOneText: '',
     optionTwoText: '',
+    toHome: false,
     
   }
 
@@ -16,17 +19,26 @@ class CreateNewPoll extends Component {
     const { optionOneText, optionTwoText } = this.state
 
     // todo:  Add NewPoll to Store
-    dispatch(handleAddQuestion({ 
-      optionOneText,
-      optionTwoText,
-      authedUser
-     }))
+    // dispatch(handleAddQuestion({ 
+    //   optionOneText,
+    //   optionTwoText,
+    //   authedUser
+    //  }))
+
+    this.setState(() => ({
+      optionOneText: '',
+      optionTwoText: '',
+      toHome: true
+    }))
 
   }
   render() {
-    const { optionOneText, optionTwoText } = this.state
+    const { optionOneText, optionTwoText, toHome } = this.state
 
   // Redirect to /home when submitted
+    if (toHome) {
+      return <Redirect to='/home' />
+    }
 
     return (
       <div>
@@ -36,7 +48,7 @@ class CreateNewPoll extends Component {
         <button
           className='btn'
           type='submit'
-          disabled={ !optionOneText || !optionTwoText }>
+          disabled={ (optionOneText === '' || optionTwoText === '')} >
             Submit
         </button>
         </form>

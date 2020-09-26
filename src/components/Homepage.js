@@ -35,7 +35,7 @@ class Homepage extends React.Component {
           <li className={list === 'unansweredQs' ? '' : 'poll-active'}
             onClick={this.handleAnsweredSelect}><a href='#'>Answered Questions</a></li>
         </ul>
-        <PollsList qids={list === 'unansweredQs' ? unansweredQid : answeredQid} />
+        <PollsList unansweredQids={list === 'unansweredQs' ? unansweredQid : null} answeredQids={list === 'answeredQs' ? answeredQid : null} />
       </div>
     )
   }

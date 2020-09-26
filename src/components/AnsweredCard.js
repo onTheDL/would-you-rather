@@ -5,7 +5,7 @@ class AnsweredCard extends Component {
   render() {
     return (
       <div>
-        AnsweredCard
+        AnsweredCard ID: {this.props.ansId}
       </div>
     )
   }

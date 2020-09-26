@@ -5,6 +5,7 @@ import {
 } from '../actions/questions'
 
 
+
 export default function questions (state = {}, action) {
   switch(action.type) {
     case RECEIVE_QUESTIONS :
@@ -22,9 +23,19 @@ export default function questions (state = {}, action) {
       }
 
     case SET_QUESTION_ANSWER :
+      const { qid, answer, authedUser} = action.info
       return {
-        
+        ...state,
+        [qid]: {
+          ...state[qid],
+          [answer]: {
+            ...state[qid][answer],
+            votes: state[qid][answer].votes.concat([authedUser])
+          }
+        }
+
       }
+
     default :
       return state
   }

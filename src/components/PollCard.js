@@ -1,20 +1,35 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 
 
 
 class PollCard extends React.Component {
+  state = {
+    toQuestionCard: false
+  }
+  handleClick = (e) => {
+    e.preventDefault()
+    this.setState(() => ({
+      toQuestionCard: true
+    }))
+  }
   render() {
 
     console.log('PollCard props', this.props)
     
     const { author, question } = this.props
     const { avatarURL, name } = author
-    const { optionOne, optionTwo } = question
+    const { optionOne, optionTwo, id } = question
 
     if (!question) {
       return <p>This poll does not exist.</p>
     }
+
+    if (this.state.toQuestionCard) {
+      return <Redirect to={`/questions/${id}`} />
+    }
+
 
     return (
       <div className='poll-card'>
@@ -28,9 +43,9 @@ class PollCard extends React.Component {
             <div className='poll-info center'>
               <h4>Would you rather ...</h4>
               <p>{optionOne.text}</p>
-              <p>OR</p>
+              <p>or</p>
               <p>{optionTwo.text}</p>
-              <button>View Poll</button>
+              <button className='btn' onClick={this.handleClick}>View Poll</button>
             </div>
             
           </div>
