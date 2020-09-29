@@ -23,7 +23,7 @@ export default function questions (state = {}, action) {
       }
 
     case SET_QUESTION_ANSWER :
-      const { qid, answer, authedUser} = action.info
+      const { authedUser, qid, answer } = action.info
       return {
         ...state,
         [qid]: {

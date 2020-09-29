@@ -1,20 +1,31 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { handleQuestionAnswer } from '../actions/shared'
 
 class QuestionCard extends React.Component {
   state = {
-    selected: ''
+    optSelected: '',
+    submitted: false,
+  }
+
+  handleOptionChange = (e) => {
+    this.setState({
+      optSelected: e.target.value
+    })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    const answer = e.target.value
+    const answer = this.state.optSelected
     const qid = this.props.match.params.id
     const { dispatch, authedUser } = this.props
 
-    
     dispatch(handleQuestionAnswer({ authedUser, qid, answer }))
+
+    this.setState({
+      submitted: true,
+    })
   }
 
   render() {
@@ -30,9 +41,26 @@ class QuestionCard extends React.Component {
     const { optionOne, optionTwo, id } = question
     const { avatarURL, name } = author
 
+    
+
     // if question poll not found, return error message
     if (!question) {
       return <p>This poll does not exist.</p>
+    }
+
+    const { optSelected, submitted } = this.state
+
+    console.log('QuestionCard qid:', qid)
+    console.log('QuestionCard optSelected:', 
+    optSelected)
+    
+    if (submitted) {
+      return <Redirect 
+        to={{
+          pathname: `/answers/${id}`,
+          state: { qid: id, optSelected, }
+        }} 
+        />
     }
 
     return (
@@ -50,21 +78,26 @@ class QuestionCard extends React.Component {
               <form onSubmit={this.handleSubmit}>
                 <div className='poll-options-align'>
                   <label>
-                    <input type='radio' name='poll-options' value='optionOne' />
+                    <input 
+                      type='radio' name='poll-options' value='optionOne'
+                      onChange={(e) => this.handleOptionChange(e)}
+                      
+                    />
                     {optionOne.text}
                   </label>
                 </div>
                 
                 <div className='poll-options-align'>
                   <label>
-                    <input type='radio' name='poll-options' value='optionTwo' />
+                    <input 
+                    type='radio' name='poll-options' value='optionTwo'
+                    onChange={(e) => this.handleOptionChange(e)}
+                  />
                     {optionTwo.text}
                   </label>
                 </div>
                 <button className='btn' type='submit'>Save</button>
               </form>
-
-              
             </div>
             
           </div>
@@ -72,7 +105,9 @@ class QuestionCard extends React.Component {
       </div>
       </div>
     )
+    
   }
+  
 }
 
 function mapStateToProps({ questions, users, authedUser }) {

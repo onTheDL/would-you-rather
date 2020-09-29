@@ -45,7 +45,7 @@ class PollCard extends React.Component {
               <p>{optionOne.text}</p>
               <p>or</p>
               <p>{optionTwo.text}</p>
-              <button className='btn' onClick={this.handleClick}>View Poll</button>
+              <button className='btn' onClick={this.handleClick}>Cast Your Vote!</button>
             </div>
             
           </div>
@@ -56,8 +56,8 @@ class PollCard extends React.Component {
   }
 }
 
-const mapStateToProps = ({ questions, users }, { qid }) => {
-  const question = questions[qid]
+const mapStateToProps = ({ questions, users }, { unansweredQid }) => {
+  const question = questions[unansweredQid]
   const userId = question.author
   const author = users[userId]
   return {

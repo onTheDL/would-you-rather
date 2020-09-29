@@ -23,23 +23,3 @@ export function addQuestion(question) {
     question
   }
 }
-
-
-
-
-/*
-
-export function handleQuestionAnswer (info) {
-  return (dispatch) => {
-    dispatch(receiveQuestionAnswer(info))
-
-    return saveQuestionAnswer(info)
-      .catch((e) => {
-        console.warn('Error in handleReceiveQuestionAnswer: ', e)
-        dispatch(receiveQuestions(info))
-        alert('There was an error receiving your answer. Try again.')
-      })
-  }
-}
-
-*/

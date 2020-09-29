@@ -44,6 +44,7 @@ class App extends React.Component {
                   <Route path='/add' component={CreateNewPoll} />
                   <Route path='/leaderboard' component={Leaderboard} />
                   <Route path='/questions/:id' component={QuestionCard} />
+                  <Route path='/answers/:id' component={AnsweredCard} />
                 </div>
             }
           </div>

@@ -6,19 +6,19 @@ import AnsweredCard from './AnsweredCard'
 class PollsList extends React.Component {
   render(){
     const { unansweredQids, answeredQids } = this.props
-    // const idsToMap = unansweredQids ? unansweredQids : answeredQids
+    
     return (
       <div className='poll-list'>
 
         <ul>
-          {unansweredQids ? unansweredQids.map(qid => (
-            <li key={qid}>
-              <PollCard qid={qid} />
+          {unansweredQids ? unansweredQids.map(unansweredQid => (
+            <li key={unansweredQid}>
+              <PollCard unansweredQid={unansweredQid} />
             </li>
           ))
-          : answeredQids.map(ansId => (
-            <li key={ansId}>
-              <AnsweredCard ansId={ansId}/>
+          : answeredQids.map(answeredQids => (
+            <li key={answeredQids}>
+              <AnsweredCard ansQidFromHome={answeredQids}/>
             </li>
           ))
           }

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { setAuthedUser } from '../actions/authedUser'
 
 class Login extends React.Component {
-  
   state = {
     id: ''
   }

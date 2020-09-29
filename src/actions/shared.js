@@ -1,10 +1,22 @@
-import { getInitialData, saveQuestionAnswer } from '../utils/api'
-import { receiveUsers, setUserAnswer } from './users'
+import { getInitialData, saveQuestionAnswer, saveQuestion } from '../utils/api'
+import { receiveUsers, setUserAnswer, addUserQuestion } from './users'
 import { receiveQuestions, receiveQuestionAnswer, addQuestion } from './questions'
-import { setAuthedUser } from './authedUser'
+
 import { showLoading, hideLoading } from 'react-redux-loading'
 
-// const AUTHED_USER = 'sarahedo'
+export function handleSaveQuestion(question) {
+  return (dispatch) => {
+    dispatch(showLoading())
+    return saveQuestion(question)
+      .then((question) => {
+        dispatch(addQuestion(question))
+        dispatch(addUserQuestion(question))
+      })
+      .then(() => {
+        dispatch(hideLoading())
+      })
+  }
+}
  
 export function handleInitialData(info) {
   return (dispatch) => {
@@ -18,7 +30,6 @@ export function handleInitialData(info) {
       })
   }
 }
-
 
 export function handleQuestionAnswer(info) {
   return (dispatch) => {
