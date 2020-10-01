@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
+import ErrorPage from './ErrorPage'
 
 
 
@@ -23,7 +24,7 @@ class PollCard extends React.Component {
     const { optionOne, optionTwo, id } = question
 
     if (!question) {
-      return <p>This poll does not exist.</p>
+      return <ErrorPage />
     }
 
     if (this.state.toQuestionCard) {

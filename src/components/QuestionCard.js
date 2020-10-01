@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { handleQuestionAnswer } from '../actions/shared'
+import ErrorPage from './ErrorPage'
 
 class QuestionCard extends React.Component {
   state = {
@@ -44,7 +45,7 @@ class QuestionCard extends React.Component {
     
 
     // if question poll not found, return error message
-    if (!question) {
+    if (!question.id) {
       return <p>This poll does not exist.</p>
     }
 
@@ -55,9 +56,9 @@ class QuestionCard extends React.Component {
     optSelected)
     
     if (submitted) {
-      return <Redirect 
+        return <Redirect 
         to={{
-          pathname: `/answers/${id}`,
+          pathname: `/answer/:${id}`,
           state: { qid: id, optSelected, }
         }} 
         />

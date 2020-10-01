@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import ErrorPage from '../components/ErrorPage'
 
 class AnsweredCard extends Component {
   render() {
     
   const { ansQidFromHome, users, questions, authedUser } = this.props
 
+  // if(!this.props.location) {
+  //   return <ErrorPage />
+  // }
 
   const qid = this.props.location 
     ? this.props.location.state.qid
@@ -48,9 +52,9 @@ class AnsweredCard extends Component {
           className='avatar' />
         <div className='poll-info'>
           <div>
-            <span>{name} asks</span>
+            <span>{name}'s question</span>
             <div className='poll-info center'>
-              <h3>Would you rather ...</h3>
+              <h2>Result</h2>
               <p>
                 {optionOne.text}
                 {isSelected('optionOne') && <span>&larr; Your Answer</span>}

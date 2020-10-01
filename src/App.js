@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from './actions/shared'
 import Homepage from './components/Homepage'
@@ -10,6 +10,7 @@ import CreateNewPoll from './components/CreateNewPoll'
 import Leaderboard from './components/Leaderboard'
 import Nav from './components/Nav'
 import QuestionCard from './components/QuestionCard'
+import ErrorPage from './components/ErrorPage'
 
 class App extends React.Component {
 
@@ -31,22 +32,25 @@ class App extends React.Component {
 
             {authenticated && <Nav />}
 
-            {authenticated === null
-              ? <Route 
-                  path='*'
-                  render={({ history }) => (
-                    <Login navToHome={() => history.push('/home')} />
-                    )}
-                />
-              
-              : <div>
-                  <Route path='/home' component={Homepage} />
-                  <Route path='/add' component={CreateNewPoll} />
-                  <Route path='/leaderboard' component={Leaderboard} />
-                  <Route path='/questions/:id' component={QuestionCard} />
-                  <Route path='/answers/:id' component={AnsweredCard} />
-                </div>
-            }
+            <Switch>
+              {authenticated === null
+                ? <Route 
+                    path='*'
+                    render={({ history }) => (
+                      <Login navToHome={() => history.push('/home')} />
+                      )}
+                  />
+                
+                : <div>
+                    <Route path='/home' component={Homepage} />
+                    <Route path='/add' component={CreateNewPoll} />
+                    <Route path='/leaderboard' component={Leaderboard} />
+                    <Route path='/questions/:id' component={QuestionCard} />
+                    <Route path='/answer/:id' component={AnsweredCard} />
+                  </div>
+              }
+              <Route component={ErrorPage} />
+            </Switch>
           </div>
         </Fragment>
       </Router>

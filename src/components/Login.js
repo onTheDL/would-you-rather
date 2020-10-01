@@ -19,10 +19,16 @@ class Login extends React.Component {
     const { dispatch } = this.props
     const { id } = this.state
     dispatch(setAuthedUser(id))
-    this.props.navToHome()
+
+    // const { navToHome, match } = this.props
+    // if(!match.params) {
+    //   navToHome()
+    // }
+    
 
   } 
   render() {
+    console.log('LOGIN props:', this.props)
     const { id } = this.state
     return (
       <div>

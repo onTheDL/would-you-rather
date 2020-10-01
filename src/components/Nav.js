@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { removeAuthedUser } from '../actions/authedUser'
-import Login from './Login'
+
 
 class Nav extends React.Component {
   state = {
@@ -45,7 +45,8 @@ class Nav extends React.Component {
             </NavLink>
           </li>
           <li style={{display: "flex"}}>
-            <span>Hello</span>
+            <span>Hello {name}</span>
+            
             <span>
               <img
                 src={avatarURL}
