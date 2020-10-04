@@ -108,4 +108,8 @@ Your code will talk to the database via 4 methods:
 | qid | String | The id of the question that was answered|
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
 
+## Additional Sources
 
+React Documentation, Forms, https://reactjs.org/docs/forms.html
+
+Tyler McGinnis, 'Handling 404 Pages with React Router v4, https://ui.dev/react-router-v4-handling-404-pages/
