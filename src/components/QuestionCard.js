@@ -33,33 +33,28 @@ class QuestionCard extends React.Component {
 
     console.log('QuestionCard Props', this.props)
     const qid = this.props.match.params.id
-    const { questions, users } = this.props
-
-    const question = questions[qid]
-    const authorId = question.author
-    const author = users[authorId]
-
-    const { optionOne, optionTwo, id } = question
-    const { avatarURL, name } = author
-
     
+    const { questions, users } = this.props
+    const question = questions[qid]
+    
+    const authorId = question ? question.author : null
+    const author = authorId ? users[authorId] : null
 
-    // if question poll not found, return error message
-    if (!question.id) {
-      return <p>This poll does not exist.</p>
+    if (!question || !author) {
+      return <ErrorPage />
     }
-
+ 
     const { optSelected, submitted } = this.state
 
-    console.log('QuestionCard qid:', qid)
-    console.log('QuestionCard optSelected:', 
-    optSelected)
+    // console.log('QuestionCard qid:', qid)
+    // console.log('QuestionCard optSelected:', 
+    // optSelected)
     
     if (submitted) {
         return <Redirect 
         to={{
-          pathname: `/answer/:${id}`,
-          state: { qid: id, optSelected, }
+          pathname: `/answer/:${question.id}`,
+          state: { qid: question.id, optSelected, }
         }} 
         />
     }
@@ -68,12 +63,12 @@ class QuestionCard extends React.Component {
       <div>
         <div className='poll-card'>
         <img
-          src={avatarURL}
-          alt={`Avatar of ${name}`}
+          src={author ? author.avatarURL : null}
+          alt={`Avatar of ${author ? author.name : null}`}
           className='avatar' />
         <div className='poll-info'>
           <div>
-            <span>{name} asks</span>
+            <span>{author ? author.name : null} asks</span>
             <div className='poll-info center'>
               <h4>Would you rather ...</h4>
               <form onSubmit={this.handleSubmit}>
@@ -84,7 +79,7 @@ class QuestionCard extends React.Component {
                       onChange={(e) => this.handleOptionChange(e)}
                       
                     />
-                    {optionOne.text}
+                    {question ? question.optionOne.text : null}
                   </label>
                 </div>
                 
@@ -94,7 +89,7 @@ class QuestionCard extends React.Component {
                     type='radio' name='poll-options' value='optionTwo'
                     onChange={(e) => this.handleOptionChange(e)}
                   />
-                    {optionTwo.text}
+                    {question ? question.optionTwo.text : null}
                   </label>
                 </div>
                 <button className='btn' type='submit'>Save</button>
@@ -106,9 +101,7 @@ class QuestionCard extends React.Component {
       </div>
       </div>
     )
-    
   }
-  
 }
 
 function mapStateToProps({ questions, users, authedUser }) {

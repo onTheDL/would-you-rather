@@ -51,7 +51,7 @@ class CreateNewPoll extends Component {
 
   // Redirect to /home when submitted
     if (toHome) {
-      return <Redirect to='/home' />
+      return <Redirect to='/' />
     }
 
     return (

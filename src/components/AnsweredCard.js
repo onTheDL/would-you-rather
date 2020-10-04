@@ -1,15 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ErrorPage from '../components/ErrorPage'
+import Option from './Option'
 
 class AnsweredCard extends Component {
   render() {
     
   const { ansQidFromHome, users, questions, authedUser } = this.props
-
-  // if(!this.props.location) {
-  //   return <ErrorPage />
-  // }
 
   const qid = this.props.location 
     ? this.props.location.state.qid
@@ -26,15 +22,13 @@ class AnsweredCard extends Component {
   }
 
 
-  const { avatarURL, answers, name } = users[author]
+  const { avatarURL, name } = users[author]
   
   const optSelected = users[authedUser].answers[qid]
 
   const isSelected = (option) => {
     return optSelected === option
   }
-
-
 
   console.log('AnswerCard optSelected:', optSelected)
   console.log('AnsweredCard qid:', qid)
@@ -55,15 +49,27 @@ class AnsweredCard extends Component {
             <span>{name}'s question</span>
             <div className='poll-info center'>
               <h2>Result</h2>
-              <p>
+              {/* <p className='user-answer-box'>
                 {optionOne.text}
-                {isSelected('optionOne') && <span>&larr; Your Answer</span>}
-              </p>
+                {isSelected('optionOne') && <span className='user-answer-tag'>&larr; Your Answer</span>}
+              </p> */}
+
+              <Option 
+                option={optionOne.text}
+                isSelected={isSelected('optionOne')} 
+              /> 
+
               <p>or</p>
-              <p>
+
+              <Option 
+                option={optionTwo.text} 
+                isSelected={isSelected('optionTwo')}
+              /> 
+
+              {/* <p className='user-answer-box'>
                 {optionTwo.text}
-                {isSelected('optionTwo') && <span>&larr; Your Answer</span>}
-              </p>
+                {isSelected('optionTwo') && <span className='user-answer-tag'>&larr; Your Answer</span>}
+              </p> */}
             </div>
             <div>
               <h4>Vote Details</h4>

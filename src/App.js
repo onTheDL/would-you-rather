@@ -37,17 +37,17 @@ class App extends React.Component {
                 ? <Route 
                     path='*'
                     render={({ history }) => (
-                      <Login navToHome={() => history.push('/home')} />
+                      <Login navToHome={() => history.push('/')} />
                       )}
                   />
                 
-                : <div>
-                    <Route path='/home' component={Homepage} />
+                : <Fragment>
+                    <Route path='/' exact component={Homepage} />
                     <Route path='/add' component={CreateNewPoll} />
                     <Route path='/leaderboard' component={Leaderboard} />
-                    <Route path='/questions/:id' component={QuestionCard} />
-                    <Route path='/answer/:id' component={AnsweredCard} />
-                  </div>
+                    <Route path='/questions/:id' exact component={QuestionCard} />
+                    <Route path='/answer/:id' exact component={AnsweredCard} />
+                  </Fragment>
               }
               <Route component={ErrorPage} />
             </Switch>

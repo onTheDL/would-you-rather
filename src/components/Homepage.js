@@ -44,7 +44,7 @@ class Homepage extends React.Component {
 function mapStateToProps({ questions, users, authedUser }) {
   
   const answeredQid = Object.keys(users[authedUser].answers)
-    .sort((a, b) => users[authedUser].answers[b].timestamp - users[authedUser].answers[a].timestamp)
+    .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
 
   const unansweredQid = Object.keys(questions)
     .filter(qid => !answeredQid.includes(qid))

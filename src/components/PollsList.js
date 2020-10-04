@@ -1,5 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 import PollCard from '../components/PollCard'
 import AnsweredCard from './AnsweredCard'
 
@@ -31,14 +31,10 @@ class PollsList extends React.Component {
     )
   }
 }
-// function mapStateToProps({ questions }) {
-//   const qids = Object.keys(questions)
-//     .sort((a,b) => {
-//       return questions[b].timestamp - questions[a].timestamp
-//     })
-  
-//   return {
-//     qids,
-//   }
-// }
+
+PollsList.propTypes = {
+  unansweredQids: PropTypes.array,
+  answeredQids: PropTypes.array,
+}
+
 export default PollsList

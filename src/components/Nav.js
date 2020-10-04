@@ -30,7 +30,7 @@ class Nav extends React.Component {
       <nav className='nav'>
         <ul>
           <li>
-            <NavLink to='/home' exact activeClassName='active'>
+            <NavLink to='/' exact activeClassName='active'>
               Home
             </NavLink>
           </li>
@@ -40,14 +40,14 @@ class Nav extends React.Component {
             </NavLink>
           </li>
           <li>
-            <NavLink to='/leaderboard'>
+            <NavLink to='/leaderboard' activeClassName='active'>
               Leaderboard
             </NavLink>
           </li>
           <li style={{display: "flex"}}>
             <span>Hello {name}</span>
             
-            <span>
+            <span className='nav-avatar'>
               <img
                 src={avatarURL}
                 alt={name}

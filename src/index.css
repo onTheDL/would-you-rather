@@ -60,6 +60,8 @@ a {
   flex-direction: row;
   justify-content: space-around;
   text-decoration: none;
+  margin-top: 50px;
+  position: relative;
 }
 
 .nav li:first-child {
@@ -74,6 +76,15 @@ li {
   list-style-type: none;
   padding: 10px;
   text-decoration: none;
+}
+
+.nav-avatar {
+  height: 50px;
+  border-radius: 25px;
+  margin-left: 10px;
+  position: absolute;
+  right: 120px;
+  top: -15px;
 }
 
 .avatar {
@@ -202,4 +213,27 @@ li {
   font-size: 16px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   border: none;
+}
+
+.user-answer-box {
+  position: relative;
+  background-color: #FE833A;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 10px;
+  
+}
+
+.user-answer-tag {
+  font-size: 16px;
+  font-weight: 700;
+  padding: 5px;
+  background-color: none;
+  color: #004A88;
+  position: absolute;
+  top: 8px;
+  right: -128px;
+  /* display: flex;
+  justify-content: center;
+  align-content: center; */
 }
