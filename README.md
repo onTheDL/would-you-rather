@@ -1,10 +1,23 @@
 # Would You Rather Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This wep app is the final assessment project for Udacity's React & Redux course.  The app lets the user play the "Would Your Rather?" game, where the user is asked to answer a set of two questions in the form of Would you rather ... [option A] or [option B].  Answering "neither" or "both" is prohibited.
+
+The app enables the user to answer questions, see which questions they haven't answered, view how other people have voted, post questions, and see the ranking of users on the leaderboard.
+
+## TL;DR
+
+* install all project dependencies with `npm install`
+* start the development server with `npm start`
+
+It is recommended to use the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+
+
+## App Functionality
 
 The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
-Using the provided starter code, you'll build a React/Redux front end for the application. We recommend using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
+Since this project entails a fake database, the login authentication is preset to a selection of three 'fake' users.
+
 
 ## Data
 
@@ -95,6 +108,4 @@ Your code will talk to the database via 4 methods:
 | qid | String | The id of the question that was answered|
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
 
-## Contributing
 
-This repository is the starter code for *all* Udacity students. Therefore, we most likely will not accept pull requests. For details, check out [CONTRIBUTING.md](https://github.com/udacity/reactnd-project-would-you-rather-starter/blob/master/CONTRIBUTING.md).
