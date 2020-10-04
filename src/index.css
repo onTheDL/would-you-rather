@@ -237,3 +237,8 @@ li {
   justify-content: center;
   align-content: center; */
 }
+
+.error-page {
+  margin-top: 158px;
+  padding: 50px;
+}
